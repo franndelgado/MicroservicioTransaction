@@ -50,7 +50,7 @@ public class TransactionService implements InterfaceTransactionService{
     public Boolean AccountExist(String accountNumber){
         Map<String,String> pathVariables = new HashMap<String, String>();
         pathVariables.put("number", accountNumber);
-        Account account = clientRest.getForObject("http://localhost:8002/api/accounts/list/number/{number}", Account.class, pathVariables);
+        Account account = clientRest.getForObject("http://accountMicroService/api/accounts/list/number/{number}", Account.class, pathVariables);
         if(account != null){
             return true;
         }else{
@@ -61,10 +61,9 @@ public class TransactionService implements InterfaceTransactionService{
     @Override
     public Transaction createTransaction(TransactionDto transactionDto) {
         Transaction transaction = new Transaction(transactionDto);
-        clientRest.postForEntity("http://localhost:8002/api/accounts/updateBalance", transactionDto, Account.class);
+        clientRest.postForEntity("http://accountMicroService/api/accounts/updateBalance", transactionDto, Account.class);
         sendMessage(transactionDto);
         return transactionRepository.save(transaction);
-
     }
 
     private void sendMessage(TransactionDto transactionDto) {

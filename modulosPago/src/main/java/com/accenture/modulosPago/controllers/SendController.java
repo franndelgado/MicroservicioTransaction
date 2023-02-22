@@ -1,5 +1,6 @@
 package com.accenture.modulosPago.controllers;
 
+import com.accenture.modulosPago.dtos.TransactionDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -12,8 +13,6 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
-import javax.management.ObjectName;
-import javax.ws.rs.Path;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -21,15 +20,14 @@ public class SendController {
     @Autowired
     JmsTemplate jmsTemplate;
 
-    @GetMapping("/send/{message}")
-    public String send(@PathVariable("message") String message){
-        jmsTemplate.send("demo", new MessageCreator() {
+    @GetMapping("/send/")
+    public void send(){
+        jmsTemplate.send("${queue.message.transaction}", new MessageCreator() {
             @Override
             public Message createMessage(Session session) throws JMSException {
-                ObjectMessage object = session.createObjectMessage(message);
+                ObjectMessage object = session.createObjectMessage(new TransactionDto());
                 return object;
             }
         });
-        return message;
     }
 }
