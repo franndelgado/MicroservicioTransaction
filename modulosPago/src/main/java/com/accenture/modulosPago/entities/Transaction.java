@@ -9,14 +9,12 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
     @Column
     private Double amount;
-    //@JsonFormat(pattern = "dd-MM-yyyy")
     @Column
     private String transactionDate;
     @Column

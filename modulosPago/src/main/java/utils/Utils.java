@@ -45,7 +45,7 @@ public final class Utils {
 
     public static Boolean verifyTwoDecimals(Double amount){
         String str = String.valueOf(amount);
-        int index = str.indexOf("."); //10.000000
+        int index = str.indexOf(".");
         int counter = 0;
         for(int i = index; i < str.length(); i++){
             counter++;

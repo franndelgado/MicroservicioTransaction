@@ -37,10 +37,8 @@ public class TransactionService implements InterfaceTransactionService{
     private TransactionRepository transactionRepository;
     @Autowired
     private Mapper mapper;
-
     @Autowired
     private Gson gson;
-
     @Autowired
     private JmsTemplate jmsTemplate;
     @Value("${queue.message.transaction}")
@@ -75,14 +73,6 @@ public class TransactionService implements InterfaceTransactionService{
         return (List<Transaction>) transactionRepository.findAll();
     }
 
-
-
-
-
-    /*
-    Map<String,String> pathVariables = new HashMap<String, String>();
-    pathVariables.put("idUser", idUser.toString());
-     */
 
     public List<TransactionDto> getTransactionBetweenDates(String fromDateStr, String toDateStr) throws TransactionServiceExceptions {
 

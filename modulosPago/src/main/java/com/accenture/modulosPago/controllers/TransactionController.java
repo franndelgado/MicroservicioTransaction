@@ -45,7 +45,7 @@ public class TransactionController {
         if (!Utils.verifyNumber(transactionDto.getAmount().toString())) {
             return new ResponseEntity<>("The amount must be a number", HttpStatus.NOT_ACCEPTABLE);
         }
-        if (Utils.verifyTwoDecimals(transactionDto.getAmount())) { //10.00
+        if (Utils.verifyTwoDecimals(transactionDto.getAmount())) {
             return new ResponseEntity<>("The amount must have two decimals", HttpStatus.NOT_ACCEPTABLE);
         }
         if (!Utils.verifyNumber(transactionDto.getAccountNumberOrigin().toString())) {
